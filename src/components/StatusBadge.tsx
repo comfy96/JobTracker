@@ -1,55 +1,54 @@
 import React from 'react';
 import type { ApplicationStatus } from '../types/job';
-import { Send, CalendarCheck, CheckCircle2, XCircle } from 'lucide-react';
 
 interface StatusBadgeProps {
   status: ApplicationStatus;
   size?: 'sm' | 'md' | 'lg';
+  showDotOnly?: boolean;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'md' }) => {
-  const getStatusConfig = (status: ApplicationStatus) => {
-    switch (status) {
+  const getStatusConfig = (st: ApplicationStatus) => {
+    switch (st) {
       case 'Applied':
         return {
           label: 'Applied',
           className: 'badge-applied',
-          icon: Send,
+          dotColor: '#3B82F6',
         };
       case 'Interview':
         return {
           label: 'Interview',
           className: 'badge-interview',
-          icon: CalendarCheck,
+          dotColor: '#8B5CF6',
         };
       case 'Offer':
         return {
           label: 'Offer',
           className: 'badge-offer',
-          icon: CheckCircle2,
+          dotColor: '#10B981',
         };
       case 'Rejected':
         return {
           label: 'Rejected',
           className: 'badge-rejected',
-          icon: XCircle,
+          dotColor: '#EF4444',
         };
       default:
         return {
-          label: status,
+          label: st,
           className: 'badge-default',
-          icon: Send,
+          dotColor: '#6B7280',
         };
     }
   };
 
   const config = getStatusConfig(status);
-  const Icon = config.icon;
 
   return (
-    <span className={`status-badge ${config.className} badge-${size}`}>
-      <Icon size={size === 'sm' ? 12 : size === 'lg' ? 16 : 14} />
-      <span>{config.label}</span>
+    <span className={`status-badge ${config.className} size-${size}`}>
+      <span className="status-badge-dot" style={{ backgroundColor: config.dotColor }} />
+      <span className="status-badge-text">{config.label}</span>
     </span>
   );
 };

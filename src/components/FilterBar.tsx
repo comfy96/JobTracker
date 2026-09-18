@@ -31,59 +31,77 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   ];
 
   return (
-    <div className="filter-bar">
-      <div className="filter-controls">
-        <div className="search-box">
-          <Search size={18} className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search by company or job role..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="search-input"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => onSearchChange('')}
-              className="search-clear-btn"
-              title="Clear search"
-            >
-              <X size={16} />
-            </button>
-          )}
+    <div className="applications-filter-container">
+      {/* Header Row */}
+      <div className="filter-header-row">
+        <div className="heading-group">
+          <h2 className="section-title">Applications</h2>
+          <span className="count-pill">
+            {filteredCount} {filteredCount === 1 ? 'application' : 'applications'}
+          </span>
         </div>
 
-        <div className="sort-box">
-          <SlidersHorizontal size={16} className="sort-icon" />
-          <select
-            value={sortBy}
-            onChange={(e) => onSortChange(e.target.value)}
-            className="sort-select"
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="company">Company (A-Z)</option>
-          </select>
-        </div>
+        {totalCount > 0 && totalCount !== filteredCount && (
+          <span className="filtering-info-text">
+            Filtered from {totalCount} total
+          </span>
+        )}
       </div>
 
-      <div className="status-tabs">
-        {statuses.map((s) => {
-          const isActive = selectedStatus === s.value;
-          return (
-            <button
-              key={s.value}
-              onClick={() => onSelectStatus(s.value)}
-              className={`status-tab ${isActive ? 'status-tab-active' : ''}`}
+      {/* Control Toolbar */}
+      <div className="filter-toolbar-row">
+        <div className="search-sort-group">
+          <div className="search-field-wrapper">
+            <Search size={15} className="search-field-icon" />
+            <input
+              type="text"
+              placeholder="Search by company or role..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="search-field-input"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange('')}
+                className="search-clear-button"
+                title="Clear search"
+                type="button"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+
+          <div className="sort-field-wrapper">
+            <SlidersHorizontal size={14} className="sort-field-icon" />
+            <select
+              value={sortBy}
+              onChange={(e) => onSortChange(e.target.value)}
+              className="sort-field-select"
             >
-              {s.label}
-            </button>
-          );
-        })}
-      </div>
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="company">Company (A–Z)</option>
+            </select>
+          </div>
+        </div>
 
-      <div className="results-info">
-        Showing <span className="highlight-count">{filteredCount}</span> of {totalCount} applications
+        {/* Status Filter Pills */}
+        <div className="status-pills-list">
+          {statuses.map((s) => {
+            const isActive = selectedStatus === s.value;
+            return (
+              <button
+                key={s.value}
+                onClick={() => onSelectStatus(s.value)}
+                className={`status-pill-item ${isActive ? 'active' : ''}`}
+                type="button"
+              >
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

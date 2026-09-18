@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { JobApplication, ApplicationStatus } from '../types/job';
-import { X, Building2, Briefcase, Calendar, MessageSquare, Save } from 'lucide-react';
+import { X, Building2, Briefcase, Calendar, MessageSquare, CheckCircle2 } from 'lucide-react';
 
 interface JobModalProps {
   isOpen: boolean;
@@ -30,7 +30,6 @@ export const JobModal: React.FC<JobModalProps> = ({
       setStatus(editingApplication.status);
       setNotes(editingApplication.notes || '');
     } else {
-      // Default new application values
       const today = new Date().toISOString().split('T')[0];
       setCompany('');
       setRole('');
@@ -67,74 +66,83 @@ export const JobModal: React.FC<JobModalProps> = ({
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="editorial-modal-backdrop" onClick={onClose}>
       <div
-        className="modal-container"
+        className="editorial-modal-card"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
-        <div className="modal-header">
-          <h2>{editingApplication ? 'Edit Application' : 'Add New Application'}</h2>
-          <button onClick={onClose} className="close-btn" aria-label="Close modal">
-            <X size={20} />
+        <div className="modal-top-bar">
+          <div>
+            <h3 className="modal-title">
+              {editingApplication ? 'Edit Application' : 'Add New Application'}
+            </h3>
+            <p className="modal-description">
+              {editingApplication
+                ? 'Update company details, interview stage, or notes.'
+                : 'Log a new position to keep your job search organized.'}
+            </p>
+          </div>
+          <button onClick={onClose} className="btn-modal-close" aria-label="Close dialog">
+            <X size={18} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="modal-form">
-          <div className="form-group">
-            <label className="form-label" htmlFor="company-name">
-              <Building2 size={16} /> Company Name <span className="required">*</span>
+        <form onSubmit={handleSubmit} className="modal-body-form">
+          <div className="input-field-group">
+            <label className="field-label" htmlFor="company-name">
+              <Building2 size={15} /> Company Name <span className="req-asterisk">*</span>
             </label>
             <input
               id="company-name"
               type="text"
-              className={`form-input ${errors.company ? 'input-error' : ''}`}
-              placeholder="e.g. Stripe, Google, Linear"
+              className={`text-input ${errors.company ? 'has-error' : ''}`}
+              placeholder="e.g. Stripe, Vercel, Linear"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               autoFocus
             />
-            {errors.company && <span className="error-message">{errors.company}</span>}
+            {errors.company && <span className="field-error">{errors.company}</span>}
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="job-role">
-              <Briefcase size={16} /> Job Title / Role <span className="required">*</span>
+          <div className="input-field-group">
+            <label className="field-label" htmlFor="job-role">
+              <Briefcase size={15} /> Job Title / Role <span className="req-asterisk">*</span>
             </label>
             <input
               id="job-role"
               type="text"
-              className={`form-input ${errors.role ? 'input-error' : ''}`}
-              placeholder="e.g. Frontend Engineer, Product Manager"
+              className={`text-input ${errors.role ? 'has-error' : ''}`}
+              placeholder="e.g. Senior Frontend Engineer"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             />
-            {errors.role && <span className="error-message">{errors.role}</span>}
+            {errors.role && <span className="field-error">{errors.role}</span>}
           </div>
 
-          <div className="form-row">
-            <div className="form-group flex-1">
-              <label className="form-label" htmlFor="applied-date">
-                <Calendar size={16} /> Application Date <span className="required">*</span>
+          <div className="input-row-two-col">
+            <div className="input-field-group col-half">
+              <label className="field-label" htmlFor="applied-date">
+                <Calendar size={15} /> Applied Date <span className="req-asterisk">*</span>
               </label>
               <input
                 id="applied-date"
                 type="date"
-                className={`form-input ${errors.appliedDate ? 'input-error' : ''}`}
+                className={`text-input ${errors.appliedDate ? 'has-error' : ''}`}
                 value={appliedDate}
                 onChange={(e) => setAppliedDate(e.target.value)}
               />
-              {errors.appliedDate && <span className="error-message">{errors.appliedDate}</span>}
+              {errors.appliedDate && <span className="field-error">{errors.appliedDate}</span>}
             </div>
 
-            <div className="form-group flex-1">
-              <label className="form-label" htmlFor="application-status">
-                Status <span className="required">*</span>
+            <div className="input-field-group col-half">
+              <label className="field-label" htmlFor="application-status">
+                Current Status <span className="req-asterisk">*</span>
               </label>
               <select
                 id="application-status"
-                className="form-select"
+                className="select-input"
                 value={status}
                 onChange={(e) => setStatus(e.target.value as ApplicationStatus)}
               >
@@ -146,27 +154,27 @@ export const JobModal: React.FC<JobModalProps> = ({
             </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="job-notes">
-              <MessageSquare size={16} /> Notes
+          <div className="input-field-group">
+            <label className="field-label" htmlFor="job-notes">
+              <MessageSquare size={15} /> Application Notes
             </label>
             <textarea
               id="job-notes"
-              className="form-textarea"
-              rows={4}
-              placeholder="Add key details: referral context, interview dates, salary range, recruiter contact, next steps..."
+              className="textarea-input"
+              rows={3}
+              placeholder="Referral details, compensation targets, recruiter contact info, next interview dates..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
             />
           </div>
 
-          <div className="modal-footer">
-            <button type="button" onClick={onClose} className="btn btn-ghost">
+          <div className="modal-bottom-actions">
+            <button type="button" onClick={onClose} className="btn-modal-cancel">
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary btn-icon">
-              <Save size={18} />
-              <span>{editingApplication ? 'Save Changes' : 'Add Application'}</span>
+            <button type="submit" className="btn-primary-cta modal-submit">
+              <CheckCircle2 size={16} />
+              <span>{editingApplication ? 'Save Changes' : 'Save Application'}</span>
             </button>
           </div>
         </form>

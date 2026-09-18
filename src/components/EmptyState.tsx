@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, SearchX, Plus, RefreshCw } from 'lucide-react';
+import { SearchX, Plus, RefreshCw, FolderPlus } from 'lucide-react';
 
 interface EmptyStateProps {
   hasFilters: boolean;
@@ -16,15 +16,15 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   if (hasFilters) {
     return (
-      <div className="empty-state">
-        <div className="empty-icon-wrapper">
-          <SearchX size={36} />
+      <div className="editorial-empty-card">
+        <div className="empty-icon-circle">
+          <SearchX size={28} />
         </div>
-        <h3 className="empty-title">No matching applications</h3>
-        <p className="empty-subtitle">
-          We couldn't find any job applications matching your current filter or search criteria.
+        <h3 className="empty-heading">No matching applications</h3>
+        <p className="empty-subtext">
+          We couldn't find any job records matching your active search or status filters.
         </p>
-        <button onClick={onClearFilters} className="btn btn-secondary mt-4">
+        <button onClick={onClearFilters} className="btn-secondary-action">
           Clear Filters & Search
         </button>
       </div>
@@ -32,22 +32,22 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   }
 
   return (
-    <div className="empty-state">
-      <div className="empty-icon-wrapper">
-        <Briefcase size={36} />
+    <div className="editorial-empty-card">
+      <div className="empty-icon-circle">
+        <FolderPlus size={28} />
       </div>
-      <h3 className="empty-title">No applications tracked yet</h3>
-      <p className="empty-subtitle">
-        Start tracking your job search! Log your application details, track interviews, and celebrate offers.
+      <h3 className="empty-heading">No applications tracked yet</h3>
+      <p className="empty-subtext">
+        Start building your application tracker. Log roles, record interview progress, and capture offers.
       </p>
-      <div className="empty-actions">
-        <button onClick={onOpenAddModal} className="btn btn-primary btn-icon">
+      <div className="empty-actions-row">
+        <button onClick={onOpenAddModal} className="btn-primary-cta">
           <Plus size={18} />
           <span>Add First Application</span>
         </button>
-        <button onClick={onResetData} className="btn btn-secondary btn-icon">
-          <RefreshCw size={16} />
-          <span>Load Sample Applications</span>
+        <button onClick={onResetData} className="btn-secondary-action">
+          <RefreshCw size={15} />
+          <span>Load Sample Data</span>
         </button>
       </div>
     </div>

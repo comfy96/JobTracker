@@ -18,32 +18,31 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
   if (!isOpen || !application) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="editorial-modal-backdrop" onClick={onClose}>
       <div
-        className="modal-container modal-small"
+        className="editorial-modal-card modal-compact"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
-        <div className="delete-modal-content">
-          <div className="delete-icon-wrapper">
-            <AlertTriangle size={28} className="text-rose-500" />
+        <div className="delete-modal-inner">
+          <div className="delete-warning-icon">
+            <AlertTriangle size={24} />
           </div>
 
-          <h3 className="delete-title">Delete Application?</h3>
-          <p className="delete-description">
-            Are you sure you want to remove tracking for{' '}
-            <strong>{application.role}</strong> at <strong>{application.company}</strong>?
-            This action cannot be undone.
+          <h3 className="delete-title">Delete Application</h3>
+          <p className="delete-message">
+            Are you sure you want to remove tracking for <strong>{application.role}</strong> at{' '}
+            <strong>{application.company}</strong>?
           </p>
 
-          <div className="modal-footer justify-end">
-            <button onClick={onClose} className="btn btn-ghost">
+          <div className="delete-modal-actions">
+            <button onClick={onClose} className="btn-modal-cancel">
               Cancel
             </button>
-            <button onClick={onConfirm} className="btn btn-danger btn-icon">
+            <button onClick={onConfirm} className="btn-danger-confirm">
               <Trash2 size={16} />
-              <span>Delete Application</span>
+              <span>Delete</span>
             </button>
           </div>
         </div>
