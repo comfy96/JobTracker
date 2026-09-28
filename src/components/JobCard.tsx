@@ -63,20 +63,20 @@ export const JobCard: React.FC<JobCardProps> = ({
 
   return (
     <article className="editorial-job-card">
-      {/* 1. Header Row: Logo, Company Name, Applied Date & Status Trigger */}
-      <div className="card-header-row">
-        <div className="company-branding-group">
-          <CompanyLogo company={application.company} size={44} />
-          <div className="company-text-meta">
+      {/* 1. Primary Focal Row: Company Name & Status Pill side-by-side */}
+      <div className="card-top-focal-row">
+        <div className="company-focal-group">
+          <CompanyLogo company={application.company} size={42} />
+          <div className="company-focal-meta">
             <h3 className="company-name">{application.company}</h3>
             <span className="applied-date-sub">
-              <Calendar size={13} className="meta-icon" />
+              <Calendar size={12} className="meta-icon" />
               Applied {formatDate(application.appliedDate)}
             </span>
           </div>
         </div>
 
-        {/* Status Dropdown Trigger */}
+        {/* Status Pill Focal Trigger */}
         <div className="status-selector-wrapper" ref={dropdownRef}>
           <button
             onClick={() => setIsChangingStatus(!isChangingStatus)}
@@ -110,20 +110,20 @@ export const JobCard: React.FC<JobCardProps> = ({
         </div>
       </div>
 
-      {/* 2. Job Role Hierarchy */}
-      <div className="role-title-row">
+      {/* 2. Immediate Follow-up: Job Role Title */}
+      <div className="card-role-section">
         <h4 className="job-role-title">{application.role}</h4>
       </div>
 
       {/* 3. Notes Accent Block */}
       {application.notes ? (
         <div className="card-notes-accent-block">
-          <Quote size={13} className="notes-quote-icon" />
+          <Quote size={12} className="notes-quote-icon" />
           <p className="notes-text-content">{application.notes}</p>
         </div>
       ) : (
         <div className="card-notes-placeholder">
-          <span className="placeholder-text">No additional notes added</span>
+          <span className="placeholder-text">No additional notes</span>
         </div>
       )}
 
@@ -159,3 +159,4 @@ export const JobCard: React.FC<JobCardProps> = ({
     </article>
   );
 };
+

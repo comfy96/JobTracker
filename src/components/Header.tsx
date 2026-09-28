@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Briefcase, Plus, RefreshCw, Sparkles, MoreHorizontal } from 'lucide-react';
+import { Plus, RefreshCw, Sparkles, MoreHorizontal } from 'lucide-react';
 import { HeroIllustration } from './HeroIllustration';
 
 interface HeaderProps {
@@ -24,13 +24,38 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAddModal, onResetData }) =
       <div className="top-nav">
         <div className="nav-container">
           <div className="brand-logo">
-            <div className="logo-icon-box">
-              <Briefcase size={20} className="brand-icon" />
+            <div className="logo-icon-box" title="JobTrack Career Tracker">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="brand-icon-svg"
+              >
+                {/* Sleek career upward trend motif with node check */}
+                <path
+                  d="M3 17L9 11L13 15L21 7"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M16 7H21V12"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <circle cx="13" cy="15" r="2" fill="currentColor" />
+              </svg>
             </div>
             <div className="brand-text">
-              <span className="brand-name">JobTrack</span>
-              <span className="brand-badge">Pro</span>
+              <span className="brand-job">Job</span>
+              <span className="brand-track">Track</span>
             </div>
+            <span className="brand-badge-pro">PRO</span>
           </div>
 
           <div className="top-nav-right">
@@ -82,21 +107,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAddModal, onResetData }) =
             <p className="hero-subline">
               Track your applications, interviews, and opportunities in one place.
             </p>
-
-            <div className="hero-actions-row">
-              <button onClick={onOpenAddModal} className="btn-primary-cta hero-btn">
-                <Plus size={18} />
-                <span>Add Application</span>
-              </button>
-              <button
-                onClick={onResetData}
-                className="btn-ghost-utility"
-                title="Reset sample data"
-              >
-                <RefreshCw size={14} />
-                <span>Reset Demo Data</span>
-              </button>
-            </div>
           </div>
 
           <HeroIllustration className="hero-graphics" />
@@ -105,3 +115,4 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAddModal, onResetData }) =
     </header>
   );
 };
+

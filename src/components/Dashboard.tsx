@@ -129,36 +129,51 @@ export const Dashboard: React.FC<DashboardProps> = ({
           {stats.total > 0 && (
             <div className="pipeline-visualizer">
               <div className="pipeline-label-row">
-                <span className="pipeline-title">Application Pipeline</span>
+                <div className="pipeline-title-group">
+                  <span className="pipeline-title">Application Pipeline</span>
+                  <span className="pipeline-interactive-hint">&bull; Click segment to filter</span>
+                </div>
                 <span className="pipeline-stats-summary">{stats.total} Total Tracked</span>
               </div>
-              <div className="pipeline-bar-track">
+              <div className="pipeline-bar-track" role="region" aria-label="Interactive pipeline breakdown">
                 {stats.applied > 0 && (
-                  <div
-                    className="pipeline-seg seg-applied"
+                  <button
+                    type="button"
+                    onClick={() => onSelectFilter('Applied')}
+                    className={`pipeline-seg seg-applied ${activeFilter === 'Applied' ? 'active-seg' : ''}`}
                     style={{ width: `${appliedPct}%` }}
-                    title={`Applied: ${stats.applied} (${appliedPct}%)`}
+                    title={`Click to filter: Applied (${stats.applied} - ${appliedPct}%)`}
+                    aria-label={`Filter by Applied status (${stats.applied} applications)`}
                   />
                 )}
                 {stats.interviews > 0 && (
-                  <div
-                    className="pipeline-seg seg-interview"
+                  <button
+                    type="button"
+                    onClick={() => onSelectFilter('Interview')}
+                    className={`pipeline-seg seg-interview ${activeFilter === 'Interview' ? 'active-seg' : ''}`}
                     style={{ width: `${interviewPct}%` }}
-                    title={`Interview: ${stats.interviews} (${interviewPct}%)`}
+                    title={`Click to filter: Interview (${stats.interviews} - ${interviewPct}%)`}
+                    aria-label={`Filter by Interview status (${stats.interviews} applications)`}
                   />
                 )}
                 {stats.offers > 0 && (
-                  <div
-                    className="pipeline-seg seg-offer"
+                  <button
+                    type="button"
+                    onClick={() => onSelectFilter('Offer')}
+                    className={`pipeline-seg seg-offer ${activeFilter === 'Offer' ? 'active-seg' : ''}`}
                     style={{ width: `${offerPct}%` }}
-                    title={`Offer: ${stats.offers} (${offerPct}%)`}
+                    title={`Click to filter: Offer (${stats.offers} - ${offerPct}%)`}
+                    aria-label={`Filter by Offer status (${stats.offers} applications)`}
                   />
                 )}
                 {stats.rejections > 0 && (
-                  <div
-                    className="pipeline-seg seg-rejected"
+                  <button
+                    type="button"
+                    onClick={() => onSelectFilter('Rejected')}
+                    className={`pipeline-seg seg-rejected ${activeFilter === 'Rejected' ? 'active-seg' : ''}`}
                     style={{ width: `${rejectionsPct}%` }}
-                    title={`Rejected: ${stats.rejections} (${rejectionsPct}%)`}
+                    title={`Click to filter: Rejected (${stats.rejections} - ${rejectionsPct}%)`}
+                    aria-label={`Filter by Rejected status (${stats.rejections} applications)`}
                   />
                 )}
               </div>

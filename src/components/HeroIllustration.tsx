@@ -13,16 +13,16 @@ export const HeroIllustration: React.FC<{ className?: string }> = ({ className =
       >
         <defs>
           <linearGradient id="hero-grad-primary" x1="0" y1="0" x2="260" y2="140" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#635BFF" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.04" />
+            <stop offset="0%" stopColor="#2563EB" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.04" />
           </linearGradient>
           <linearGradient id="card-grad-1" x1="20" y1="20" x2="140" y2="110" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#FFFFFF" />
             <stop offset="100%" stopColor="#F9FAFB" />
           </linearGradient>
           <linearGradient id="accent-pill" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#635BFF" />
-            <stop offset="100%" stopColor="#4F46E5" />
+            <stop offset="0%" stopColor="#2563EB" />
+            <stop offset="100%" stopColor="#1D4ED8" />
           </linearGradient>
           <filter id="soft-shadow" x="0" y="0" width="280" height="160" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
             <feDropShadow dx="0" dy="8" stdDeviation="12" floodColor="#111827" floodOpacity="0.06" />
@@ -40,13 +40,13 @@ export const HeroIllustration: React.FC<{ className?: string }> = ({ className =
           <rect x="55" y="22" width="150" height="96" rx="14" fill="url(#card-grad-1)" stroke="#E5E7EB" strokeWidth="1.5" />
           
           {/* Card header elements */}
-          <rect x="75" y="40" width="36" height="6" rx="3" fill="#635BFF" />
+          <rect x="75" y="40" width="36" height="6" rx="3" fill="#2563EB" />
           <rect x="75" y="52" width="70" height="4" rx="2" fill="#9CA3AF" />
           <rect x="75" y="62" width="50" height="4" rx="2" fill="#E5E7EB" />
           
           {/* Checkmark circle */}
-          <circle cx="172" cy="46" r="12" fill="#EEEDFF" />
-          <path d="M167 46L170.5 49.5L177 43" stroke="#635BFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="172" cy="46" r="12" fill="#EFF6FF" />
+          <path d="M167 46L170.5 49.5L177 43" stroke="#2563EB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
 
           {/* Progress bar line */}
           <rect x="75" y="82" width="110" height="6" rx="3" fill="#F3F4F6" />
@@ -66,10 +66,11 @@ export const HeroIllustration: React.FC<{ className?: string }> = ({ className =
         </g>
 
         {/* Decorative sparkles/dots */}
-        <circle cx="45" cy="35" r="3" fill="#635BFF" opacity="0.6" />
+        <circle cx="45" cy="35" r="3" fill="#2563EB" opacity="0.6" />
         <circle cx="35" cy="85" r="4" fill="#8B5CF6" opacity="0.4" />
         <circle cx="225" cy="95" r="3" fill="#10B981" opacity="0.6" />
       </svg>
     </div>
   );
 };
+
